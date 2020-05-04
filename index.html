@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dogstagram</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">Dogstagram</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- Might or might not keep this dropdown -->
+          <div class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Dog breeds
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container-fluid">
+        <div class="post-card">
+          <div class="title-section">
+            <span class="title">Dog Name</span>
+            <button class="edit-button">Edit</button>
+          </div>
+          <img
+            src="https://images.dog.ceo/breeds/terrier-silky/n02097658_953.jpg"
+            alt=""
+            class="image"
+          />
+          <button class="like-button">♥</button>
+          <p class="likes">3 Likes</p>
+          <p class="caption">caption</p>
+          <ul class="comments">
+            <li>comment 1</li>
+            <li>comment 2</li>
+          </ul>
+          <form class="comment-form">
+            <input
+              class="comment-input"
+              type="text"
+              name="comment"
+              placeholder="Add a comment..."
+            />
+            <button class="comment-button" type="submit">Post</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="post-card">
+          <div class="title-section">
+            <span class="title">Dog Name</span>
+            <button class="edit-button">Edit</button>
+          </div>
+          <img
+            src="https://images.dog.ceo/breeds/germanshepherd/n02106662_10490.jpg"
+            alt=""
+            class="image"
+          />
+          <button class="like-button">♥</button>
+          <p class="likes">3 Likes</p>
+          <p class="caption">caption</p>
+          <ul class="comments">
+            <li>comment 1</li>
+            <li>comment 2</li>
+          </ul>
+          <form class="comment-form">
+            <input
+              class="comment-input"
+              type="text"
+              name="comment"
+              placeholder="Add a comment..."
+            />
+            <button class="comment-button" type="submit">Post</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="./src/index.js"></script>
+  </body>
+</html>

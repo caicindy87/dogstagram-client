@@ -1,0 +1,127 @@
+header {
+  padding: 15px;
+  text-align: center;
+  background-color: #151e3f;
+  color: #f2f3d9;
+  /* font-family: "Bilbo", cursive; */
+  font-family: "Calligraffitti", cursive;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  font-family: "Calligraffitti", cursive;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  color: #f2f3d9;
+}
+
+/* Might or might not keep this dropdown */
+#navbarDropdown {
+  color: #f2f3d9;
+}
+
+body {
+  text-align: center;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+}
+
+.post-card {
+  margin-top: 30px;
+  display: block;
+  width: 550px;
+  border: 2px solid #00000020;
+  border-radius: 3px;
+  text-align: left;
+  background-color: white;
+}
+
+.title-section {
+  border-bottom: 1px solid #00000020;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.edit-button {
+  border: none;
+  background: none;
+  color: rgb(92, 114, 238);
+  font-weight: 600;
+}
+
+.edit-button:focus {
+  outline: none;
+}
+
+.image {
+  display: block;
+  width: 75%;
+  margin: 20px auto 8px;
+}
+
+.like-button {
+  display: inline-flex;
+  border: none;
+  background: none;
+  font-size: 2rem;
+  margin-bottom: 0px;
+  padding-left: 15px;
+}
+
+.like-button:focus {
+  outline: none;
+}
+
+.likes {
+  padding-left: 15px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.caption {
+  padding-left: 15px;
+  padding-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #00000020;
+}
+
+.comments {
+  list-style-type: none;
+  padding-left: 15px;
+  margin: 2px;
+}
+
+.comment-form {
+  width: 100%;
+  border-top: 1px solid #00000020;
+  padding: 15px;
+  padding-top: 20px;
+}
+
+.comment-input {
+  width: 90%;
+  border: none;
+  outline: none;
+}
+
+.comment-button {
+  border: none;
+  color: rgb(92, 114, 238);
+  font-weight: 600;
+  outline: none;
+}
+
+.comment-button:focus {
+  outline: none;
+}
