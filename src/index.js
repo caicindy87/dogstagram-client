@@ -66,7 +66,7 @@ function renderPostOnModal() {
   fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts`)
     .then((resp) => resp.json())
     .then((data) => {
-      modalTitle.innerText = `${data[0].dog.name} profile`;
+      modalTitle.innerText = `${data[0].dog.name}'s profile`;
       renderPostsModal(data);
     });
 }
@@ -112,7 +112,6 @@ function listenToLikeBtn() {
   const card = document.getElementsByTagName("main")[0];
 
   card.addEventListener("click", (event) => {
-    // debugger;
     if (event.target.className === "like-button") {
       const postId = event.target.dataset.postId;
       const dogId = event.target.dataset.dogId;
