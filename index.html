@@ -1,119 +1,167 @@
 <!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dogstagram</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dogstagram</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body>
-
-  <!-- Modal -->
-  <button type="button" class="btn btn-primary" id="my-profile" data-toggle="modal" data-target="#exampleModalLong">
-    My profile
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- End of MOdal-->
-
-  <header>
-    <div class="container">
-      <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="index.html">Dogstagram</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <body>
+    <header>
+      <div>
+        <h1>Dogstagram</h1>
+        <button id="new-dog-btn" class="nav-bar-button">
+          Create a post
         </button>
-        <!-- Might or might not keep this dropdown -->
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dog breeds
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+
+        <!-- Modal -->
+        <button
+          type="button"
+          class="nav-bar-button"
+          id="my-profile"
+          data-toggle="modal"
+          data-target="#exampleModalLong"
+        >
+          My profile
+        </button>
+      </div>
+    </header>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalLong"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
-      </nav>
+      </div>
     </div>
-  </header>
+    <!-- End of MOdal-->
 
-  <!-- Dog Creation Form-->
-  <div class="dog-creation-form">
-    <form class="form-inline dog-form">
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="dog-name" class="sr-only">Dog name</label>
-        <input type="text" class="form-control" name="dog-name" id="dog-name-input" placeholder="Dog name">
-      </div>
+    <!-- Dog Creation Form-->
+    <div class="dog-creation-form">
+      <form class="dog-form">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="dog-name" class="sr-only">Dog name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dog-name"
+            id="dog-name-input"
+            placeholder="Dog name"
+          />
+        </div>
 
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="dog-breed" class="sr-only">Dog breed</label>
-        <input type="text" class="form-control" name="dog-breed" id="dog-breed-input" placeholder="Dog breed">
-      </div>
-      <button type="submit" class="btn btn-primary mb-2">Create dog</button>
-    </form>
-  </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="dog-breed" class="sr-only">Dog breed</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dog-breed"
+            id="dog-breed-input"
+            placeholder="Dog breed"
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-primary mb-2">
+          Create dog
+        </button>
+      </form>
+    </div>
 
-  <!-- Post Creation Form-->
-  <div class="post-creation-form">
-    <form class="form-inline dog-form">
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="caption" class="sr-only">Caption</label>
-        <input type="text" class="form-control" name="caption" id="caption-input" placeholder="Caption...">
-      </div>
+    <!-- Post Creation Form-->
+    <div class="post-creation-form">
+      <form class="dog-form">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="caption" class="sr-only">Caption</label>
+          <input
+            type="text"
+            class="form-control"
+            name="caption"
+            id="caption-input"
+            placeholder="Add a caption..."
+          />
+        </div>
 
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="image-url" class="sr-only">Image url</label>
-        <input type="text" class="form-control" name="image-url" id="image-url-input" placeholder="Set image...">
-      </div>
-      <button type="submit" class="btn btn-primary mb-2">Create Post!</button>
-    </form>
-    <input type='text' id='filter'>
-  </div>
-  <main>
-    <!-- Posts go here -->
-  </main>
-  <script src="./src/index.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
-</body>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="image-url" class="sr-only">Image url</label>
+          <input
+            type="text"
+            class="form-control"
+            name="image-url"
+            id="image-url-input"
+            placeholder="Set image..."
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-primary mb-2">
+          Create Post
+        </button>
+      </form>
+    </div>
+    
+    <main>
+      <!-- Posts go here -->
+    </main>
 
+    <script src="./src/index.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
