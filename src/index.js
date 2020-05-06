@@ -32,7 +32,7 @@ function renderPost(postInfo) {
       <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
-    <button class="like-button" data-id="${postInfo.id}">♥</button>
+    <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
     <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
     <p class="caption">${postInfo.caption}</p>
     <p id="comments-title">Comments</p>`;
@@ -72,7 +72,7 @@ function renderSinglePost(postInfo) {
       <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
-    <button class="like-button" data-id="${postInfo.id}">♥</button>
+    <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
     <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
     <p class="caption">${postInfo.caption}</p>
     <p id="comments-title">Comments</p>`;
@@ -104,13 +104,15 @@ function listenToLikeBtn() {
   const card = document.getElementsByTagName("main")[0];
 
   card.addEventListener("click", (event) => {
+    // debugger;
     if (event.target.className === "like-button") {
-      const postId = event.target.dataset.id;
+      const postId = event.target.dataset.postId;
+      const dogId = event.target.dataset.dogId;
       const getPostLikes = document.getElementById(`${postId}`);
       let currentLikes = parseInt(getPostLikes.innerText.split(" ")[0]);
       currentLikes += 1;
       getPostLikes.innerText = `${currentLikes} Likes`;
-      fetch(`http://localhost:3000/api/v1/posts/${postId}`, {
+      fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts/${postId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
