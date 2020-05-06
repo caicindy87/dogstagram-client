@@ -68,7 +68,7 @@ function renderSinglePost(postInfo) {
   const partOne = `<div class="container-fluid" data-breed="${breed}">
   <div class="post-card">
     <div class="title-section">
-      <span class="title">${postInfo.dog.name}</span>
+      <span class="title">${postInfo.dog.name} - ${postInfo.dog.breed}</span>
       <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
@@ -268,16 +268,18 @@ function checkExistingDog() {
   }
 }
 
-function filterDogs(){
-  const input = document.getElementById('filter');
-  input.addEventListener('input', event => {
+function filterDogs() {
+  const input = document.getElementById("filter");
+  input.addEventListener("input", (event) => {
     filter(input.value.toLowerCase());
     function filter(e) {
-      var regex = new RegExp('\\b\\w*' + e + '\\w*\\b');
-      $('.container-fluid').hide()
-          .filter(function () {
-          return regex.test($(this).data('breed'))
-      }).show();
-  }
-  })
+      var regex = new RegExp("\\b\\w*" + e + "\\w*\\b");
+      $(".container-fluid")
+        .hide()
+        .filter(function () {
+          return regex.test($(this).data("breed"));
+        })
+        .show();
+    }
+  });
 }

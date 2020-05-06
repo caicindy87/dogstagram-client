@@ -8,10 +8,15 @@ header {
 
 header div {
   display: flex;
+  align-items: center;
 }
 
 h1 {
   flex-grow: 1;
+}
+
+#filter {
+  margin-top: 6px;
 }
 
 .nav-bar-button {
@@ -20,7 +25,7 @@ h1 {
   border-radius: 3px;
   color: #f2f3d9;
   margin: 5px;
-  padding: 1px 6px;
+  /* padding: 1px 6px; */
 }
 
 .nav-bar-button:focus {
