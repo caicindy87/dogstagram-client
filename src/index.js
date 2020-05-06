@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   listenToLikeBtn();
   listenToCommentSubmit();
   callDogPosts();
+  filterDogs();
 });
 
 let addDog = false;
@@ -17,7 +18,6 @@ function fetchPosts() {
 }
 
 function renderPosts(posts) {
-  console.log(posts);
   const card = document.getElementsByTagName("main")[0];
   posts.reverse().forEach((post) => {
     card.innerHTML += renderSinglePost(post);
@@ -40,14 +40,12 @@ function renderPost(postInfo) {
 
 function callDogPosts() {
   const profileBtn = document.getElementById("my-profile");
-  console.log(profileBtn);
   profileBtn.addEventListener("click", (e) => {
     renderPostOnModal();
   });
 }
 
 function renderPostsModal(posts) {
-  console.log(posts);
   let modalBody = document.querySelector(".modal-body");
   posts.reverse().forEach((post) => {
     modalBody.innerHTML += renderPost(post);
@@ -60,14 +58,14 @@ function renderPostOnModal() {
   fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts`)
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data[0].dog.name);
-      modalTitle.innerText = `${data[0].dog.name}'s profile`;
+      modalTitle.innerText = `${data[0].dog.name} profile`;
       renderPostsModal(data);
     });
 }
 
 function renderSinglePost(postInfo) {
-  const partOne = `<div class="container-fluid">
+  const breed = postInfo.dog.breed.toLowerCase();
+  const partOne = `<div class="container-fluid" data-breed="${breed}">
   <div class="post-card">
     <div class="title-section">
       <span class="title">${postInfo.dog.name}</span>
@@ -187,7 +185,6 @@ function createDog() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         localStorage.setItem("dog_id", data.id);
         dogName.value = "";
         dogBreed.value = "";
@@ -269,4 +266,18 @@ function checkExistingDog() {
     dogFormContainer.style.display = "none";
     profileBtn.style.display = "none";
   }
+}
+
+function filterDogs(){
+  const input = document.getElementById('filter');
+  input.addEventListener('input', event => {
+    filter(input.value.toLowerCase());
+    function filter(e) {
+      var regex = new RegExp('\\b\\w*' + e + '\\w*\\b');
+      $('.container-fluid').hide()
+          .filter(function () {
+          return regex.test($(this).data('breed'))
+      }).show();
+  }
+  })
 }
