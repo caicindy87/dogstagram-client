@@ -5,7 +5,7 @@ header {
   color: #f2f3d9;
   font-family: "Raleway", sans-serif;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 header p {

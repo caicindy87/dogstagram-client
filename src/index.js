@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createPost();
   listenToLikeBtn();
   listenToCommentSubmit();
+  callDogPosts();
 });
 
 let addDog = false;
@@ -21,6 +22,48 @@ function renderPosts(posts) {
   posts.reverse().forEach((post) => {
     card.innerHTML += renderSinglePost(post);
   });
+}
+
+function renderPost(postInfo) {
+  return `<div class="container-fluid">
+  <div class="post-card">
+    <div class="title-section">
+      <span class="title">${postInfo.dog.name}</span>
+      <button class="edit-button">Edit</button>
+    </div>
+    <img src="${postInfo.image_url}" alt="" class="image" />
+    <button class="like-button" data-id="${postInfo.id}">♥</button>
+    <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
+    <p class="caption">${postInfo.caption}</p>
+    <p id="comments-title">Comments</p>`;
+}
+
+function callDogPosts() {
+  const profileBtn = document.getElementById("my-profile");
+  console.log(profileBtn);
+  profileBtn.addEventListener("click", (e) => {
+    renderPostOnModal();
+  });
+}
+
+function renderPostsModal(posts) {
+  console.log(posts);
+  let modalBody = document.querySelector(".modal-body");
+  posts.reverse().forEach((post) => {
+    modalBody.innerHTML += renderPost(post);
+  });
+}
+function renderPostOnModal() {
+  const modalTitle = document.querySelector(".modal-title");
+  const dogId = localStorage.getItem("dog_id");
+
+  fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts`)
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data[0].dog.name);
+      modalTitle.innerText = `${data[0].dog.name} profile`;
+      renderPostsModal(data);
+    });
 }
 
 function renderSinglePost(postInfo) {
@@ -213,13 +256,17 @@ function togglePostForm() {
 function checkExistingDog() {
   const dogFormContainer = document.querySelector(".dog-creation-form");
   const postForm = document.querySelector(".post-creation-form");
+  const profileBtn = document.getElementById("my-profile");
   let dogId = localStorage.getItem("dog_id");
+
   if (dogId) {
     togglePostForm();
     dogFormContainer.style.display = "none";
+    profileBtn.style.display = "block";
   } else {
     toggleDogForm();
     postForm.style.display = "none";
     dogFormContainer.style.display = "none";
+    profileBtn.style.display = "none";
   }
 }
