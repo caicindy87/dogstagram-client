@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   callDogPosts();
 });
 
+let addDog = false;
+
 function fetchPosts() {
   fetch("http://localhost:3000/api/v1/posts")
     .then((resp) => resp.json())
@@ -59,7 +61,7 @@ function renderPostOnModal() {
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data[0].dog.name);
-      modalTitle.innerText = `${data[0].dog.name} profile`;
+      modalTitle.innerText = `${data[0].dog.name}'s profile`;
       renderPostsModal(data);
     });
 }
@@ -172,6 +174,7 @@ function createDog() {
 
   dogForm.addEventListener("submit", (event) => {
     event.preventDefault();
+
     fetch("http://localhost:3000/api/v1/dogs", {
       method: "POST",
       headers: {
@@ -186,8 +189,9 @@ function createDog() {
       .then((data) => {
         console.log(data);
         localStorage.setItem("dog_id", data.id);
+        dogName.value = "";
+        dogBreed.value = "";
       });
-    dogForm.reset();
   });
 }
 
@@ -214,8 +218,38 @@ function createPost() {
       .then((data) => {
         console.log(data);
         card.innerHTML += renderSinglePost(data);
+        captionInput.value = "";
+        imageInput.value = "";
       })
       .catch((err) => console.log(err.message));
+  });
+}
+
+function toggleDogForm() {
+  const addBtn = document.querySelector("#new-dog-btn");
+  const dogFormContainer = document.querySelector(".dog-creation-form");
+
+  addBtn.addEventListener("click", () => {
+    addDog = !addDog;
+    if (addDog) {
+      dogFormContainer.style.display = "inline-block";
+    } else {
+      dogFormContainer.style.display = "none";
+    }
+  });
+}
+
+function togglePostForm() {
+  const addBtn = document.querySelector("#new-dog-btn");
+  const postFormContainer = document.querySelector(".post-creation-form");
+
+  addBtn.addEventListener("click", () => {
+    addDog = !addDog;
+    if (addDog) {
+      postFormContainer.style.display = "none";
+    } else {
+      postFormContainer.style.display = "inline-block";
+    }
   });
 }
 
@@ -226,12 +260,13 @@ function checkExistingDog() {
   let dogId = localStorage.getItem("dog_id");
 
   if (dogId) {
+    togglePostForm();
     dogFormContainer.style.display = "none";
-    postForm.style.display = "block";
     profileBtn.style.display = "block";
   } else {
-    dogFormContainer.style.display = "block";
+    toggleDogForm();
     postForm.style.display = "none";
+    dogFormContainer.style.display = "none";
     profileBtn.style.display = "none";
   }
 }
