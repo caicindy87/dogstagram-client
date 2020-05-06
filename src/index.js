@@ -25,7 +25,7 @@ function renderPosts(posts) {
 }
 
 function renderPost(postInfo) {
-  return `<div class="container-fluid">
+  const firstSection = `<div class="container-fluid">
   <div class="post-card">
     <div class="title-section">
       <span class="title">${postInfo.dog.name}</span>
@@ -36,6 +36,14 @@ function renderPost(postInfo) {
     <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
     <p class="caption">${postInfo.caption}</p>
     <p id="comments-title">Comments</p>`;
+
+  let commentsSection = `<ul class="comments" data-comment-post-id="${postInfo.id}">`;
+
+  postInfo.comments.forEach((comment) => {
+    commentsSection += `<li>${comment.content}</li>`;
+  });
+
+  return firstSection + commentsSection;
 }
 
 function callDogPosts() {
