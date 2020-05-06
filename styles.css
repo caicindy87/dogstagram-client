@@ -96,6 +96,12 @@ body {
   border-bottom: 1px solid #00000020;
 }
 
+#comments-title {
+  padding-left: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .comments {
   list-style-type: none;
   padding-left: 15px;
