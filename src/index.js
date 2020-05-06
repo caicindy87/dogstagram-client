@@ -14,6 +14,7 @@ function fetchPosts() {
 }
 
 function renderPosts(posts) {
+  console.log(posts);
   const card = document.getElementsByTagName("main")[0];
   posts.reverse().forEach((post) => {
     card.innerHTML += renderSinglePost(post);
@@ -94,7 +95,7 @@ function listenToCommentSubmit() {
         event.target.getElementsByClassName("comment-input")[0].dataset.inputId
       );
 
-      fetch("http://localhost:3000/api/v1/comments", {
+      fetch(`http://localhost:3000/api/v1/posts/${postId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
