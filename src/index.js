@@ -61,7 +61,7 @@ function renderPostOnModal() {
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data[0].dog.name);
-      modalTitle.innerText = `${data[0].dog.name} profile`;
+      modalTitle.innerText = `${data[0].dog.name}'s profile`;
       renderPostsModal(data);
     });
 }

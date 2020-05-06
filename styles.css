@@ -4,20 +4,27 @@ header {
   background-color: #151e3f;
   color: #f2f3d9;
   font-family: "Raleway", sans-serif;
+}
+
+header div {
   display: flex;
-  justify-content: space-evenly;
 }
 
-header p {
-  margin-top: 20px;
+h1 {
+  flex-grow: 1;
 }
 
-#new-dog-btn {
+.nav-bar-button {
   background: none;
-  border: none;
+  border: 1px solid #f2f3d9;
+  border-radius: 3px;
   color: #f2f3d9;
-  font-family: "Raleway", sans-serif;
-  text-align: right;
+  margin: 5px;
+  padding: 1px 6px;
+}
+
+.nav-bar-button:focus {
+  outline: none;
 }
 
 .dog-creation-form {
