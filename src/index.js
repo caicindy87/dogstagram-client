@@ -25,17 +25,25 @@ function renderPosts(posts) {
 }
 
 function renderPost(postInfo) {
-  return `<div class="container-fluid">
+  const firstSection = `<div class="container-fluid">
   <div class="post-card">
     <div class="title-section">
       <span class="title">${postInfo.dog.name}</span>
       <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
-    <button class="like-button" data-id="${postInfo.id}">♥</button>
+    <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
     <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
     <p class="caption">${postInfo.caption}</p>
     <p id="comments-title">Comments</p>`;
+
+  let commentsSection = `<ul class="comments" data-comment-post-id="${postInfo.id}">`;
+
+  postInfo.comments.forEach((comment) => {
+    commentsSection += `<li>${comment.content}</li>`;
+  });
+
+  return firstSection + commentsSection;
 }
 
 function callDogPosts() {
@@ -58,7 +66,7 @@ function renderPostOnModal() {
   fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts`)
     .then((resp) => resp.json())
     .then((data) => {
-      modalTitle.innerText = `${data[0].dog.name} profile`;
+      modalTitle.innerText = `${data[0].dog.name}'s profile`;
       renderPostsModal(data);
     });
 }
@@ -68,11 +76,11 @@ function renderSinglePost(postInfo) {
   const partOne = `<div class="container-fluid" data-breed="${breed}">
   <div class="post-card">
     <div class="title-section">
-      <span class="title">${postInfo.dog.name}</span>
+      <span class="title">${postInfo.dog.name} - ${postInfo.dog.breed}</span>
       <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
-    <button class="like-button" data-id="${postInfo.id}">♥</button>
+    <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
     <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
     <p class="caption">${postInfo.caption}</p>
     <p id="comments-title">Comments</p>`;
@@ -105,12 +113,13 @@ function listenToLikeBtn() {
 
   card.addEventListener("click", (event) => {
     if (event.target.className === "like-button") {
-      const postId = event.target.dataset.id;
+      const postId = event.target.dataset.postId;
+      const dogId = event.target.dataset.dogId;
       const getPostLikes = document.getElementById(`${postId}`);
       let currentLikes = parseInt(getPostLikes.innerText.split(" ")[0]);
       currentLikes += 1;
       getPostLikes.innerText = `${currentLikes} Likes`;
-      fetch(`http://localhost:3000/api/v1/posts/${postId}`, {
+      fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts/${postId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -268,16 +277,18 @@ function checkExistingDog() {
   }
 }
 
-function filterDogs(){
-  const input = document.getElementById('filter');
-  input.addEventListener('input', event => {
+function filterDogs() {
+  const input = document.getElementById("filter");
+  input.addEventListener("input", (event) => {
     filter(input.value.toLowerCase());
     function filter(e) {
-      var regex = new RegExp('\\b\\w*' + e + '\\w*\\b');
-      $('.container-fluid').hide()
-          .filter(function () {
-          return regex.test($(this).data('breed'))
-      }).show();
-  }
-  })
+      var regex = new RegExp("\\b\\w*" + e + "\\w*\\b");
+      $(".container-fluid")
+        .hide()
+        .filter(function () {
+          return regex.test($(this).data("breed"));
+        })
+        .show();
+    }
+  });
 }

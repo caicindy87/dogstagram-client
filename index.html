@@ -27,6 +27,16 @@
     <header>
       <div>
         <h1>Dogstagram</h1>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="filter" class="sr-only">Filter</label>
+          <input
+            type="text"
+            id="filter"
+            class="form-control-sm"
+            placeholder="Filter by dog breed"
+          />
+        </div>
+
         <button id="new-dog-btn" class="nav-bar-button">
           Create a post
         </button>
@@ -67,12 +77,12 @@
             </button>
           </div>
           <div class="modal-body">
-            ...
+            These are your posts!
           </div>
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-outline-secondary"
               data-dismiss="modal"
             >
               Close
@@ -142,7 +152,7 @@
         </button>
       </form>
     </div>
-    
+
     <main>
       <!-- Posts go here -->
     </main>
