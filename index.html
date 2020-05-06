@@ -1,81 +1,101 @@
 <!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dogstagram</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dogstagram</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body>
-
-  <header>
-    <div class="container">
-      <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="index.html">Dogstagram</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <body>
+    <header>
+      <p></p>
+      <h1>Dogstagram</h1>
+      <p>
+        <button id="new-dog-btn">
+          Create a post
         </button>
-        <!-- Might or might not keep this dropdown -->
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dog breeds
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+      </p>
+    </header>
+
+    <!-- Dog Creation Form-->
+    <div class="dog-creation-form">
+      <form class="dog-form">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="dog-name" class="sr-only">Dog name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dog-name"
+            id="dog-name-input"
+            placeholder="Dog name"
+          />
         </div>
-      </nav>
+
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="dog-breed" class="sr-only">Dog breed</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dog-breed"
+            id="dog-breed-input"
+            placeholder="Dog breed"
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-primary mb-2">
+          Create dog
+        </button>
+      </form>
     </div>
-  </header>
 
-  <!-- Dog Creation Form-->
-  <div class="dog-creation-form">
-    <form class="form-inline dog-form">
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="dog-name" class="sr-only">Dog name</label>
-        <input type="text" class="form-control" name="dog-name" id="dog-name-input" placeholder="Dog name">
-      </div>
+    <!-- Post Creation Form-->
+    <div class="post-creation-form">
+      <form class="dog-form">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="caption" class="sr-only">Caption</label>
+          <input
+            type="text"
+            class="form-control"
+            name="caption"
+            id="caption-input"
+            placeholder="Caption..."
+          />
+        </div>
 
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="dog-breed" class="sr-only">Dog breed</label>
-        <input type="text" class="form-control" name="dog-breed" id="dog-breed-input" placeholder="Dog breed">
-      </div>
-      <button type="submit" class="btn btn-primary mb-2">Create dog</button>
-    </form>
-  </div>
-
-  <!-- Post Creation Form-->
-  <div class="post-creation-form">
-    <form class="form-inline dog-form">
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="caption" class="sr-only">Caption</label>
-        <input type="text" class="form-control" name="caption" id="caption-input" placeholder="Caption...">
-      </div>
-
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="image-url" class="sr-only">Image url</label>
-        <input type="text" class="form-control" name="image-url" id="image-url-input" placeholder="Set image...">
-      </div>
-      <button type="submit" class="btn btn-primary mb-2">Create Post!</button>
-    </form>
-  </div>
-  <main>
-    <!-- Posts go here -->
-  </main>
-  <script src="./src/index.js"></script>
-</body>
-
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="image-url" class="sr-only">Image url</label>
+          <input
+            type="text"
+            class="form-control"
+            name="image-url"
+            id="image-url-input"
+            placeholder="Image url..."
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-primary mb-2">
+          Create Post!
+        </button>
+      </form>
+    </div>
+    <main>
+      <!-- Posts go here -->
+    </main>
+    <script src="./src/index.js"></script>
+  </body>
 </html>

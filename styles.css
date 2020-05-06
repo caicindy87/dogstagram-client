@@ -3,24 +3,31 @@ header {
   text-align: center;
   background-color: #151e3f;
   color: #f2f3d9;
-  /* font-family: "Bilbo", cursive; */
-  font-family: "Calligraffitti", cursive;
-}
-
-.container {
+  font-family: "Raleway", sans-serif;
   display: flex;
-  justify-content: space-evenly;
-  font-family: "Calligraffitti", cursive;
+  justify-content: space-between;
 }
 
-.navbar-brand {
-  font-size: 2rem;
-  color: #f2f3d9;
+header p {
+  margin-top: 20px;
 }
 
-/* Might or might not keep this dropdown */
-#navbarDropdown {
+#new-dog-btn {
+  background: none;
+  border: none;
   color: #f2f3d9;
+  font-family: "Raleway", sans-serif;
+  text-align: right;
+}
+
+.dog-creation-form {
+  margin: 30px auto 5px;
+  width: 550px;
+}
+
+.post-creation-form {
+  margin: 30px auto 5px;
+  width: 550px;
 }
 
 body {
