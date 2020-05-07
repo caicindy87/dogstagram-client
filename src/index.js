@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  checkWindowSize();
   listenToWindowResize();
   checkExistingDog();
   fetchPosts();
@@ -12,6 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let addDog = false;
+
+function checkWindowSize() {
+  const h1 = document.querySelector("h1");
+  const headerTag = document.querySelector("header");
+  if (document.documentElement.clientWidth < 1090) {
+    h1.style.display = "none";
+    headerTag.style.justifyContent = "center";
+  }
+}
 
 function fetchPosts() {
   fetch("http://localhost:3000/api/v1/posts")
@@ -359,9 +369,9 @@ function renderEdit(captionInnerText, postInfo) {
 }
 
 function listenToWindowResize() {
-  const windowSize = document.documentElement.clientWidth;
   const h1 = document.querySelector("h1");
   const headerTag = document.querySelector("header");
+
   window.addEventListener("resize", () => {
     if (document.documentElement.clientWidth < 1090) {
       h1.style.display = "none";
