@@ -386,7 +386,7 @@ function listenToWindowResize() {
   const headerTag = document.querySelector("header");
 
   window.addEventListener("resize", () => {
-    if (document.documentElement.clientWidth < 1090) {
+    if (document.documentElement.clientWidth < 1265) {
       h1.style.display = "none";
       headerTag.style.justifyContent = "center";
     } else {
