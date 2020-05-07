@@ -213,6 +213,7 @@ function createDog() {
         localStorage.setItem("dog_id", data.id);
         dogName.value = "";
         dogBreed.value = "";
+        location.href = "index.html";
       });
   });
 }
@@ -242,6 +243,7 @@ function createPost() {
         card.innerHTML += renderSinglePost(data);
         captionInput.value = "";
         imageInput.value = "";
+        location.href = "index.html";
       })
       .catch((err) => console.log(err.message));
   });
