@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   checkWindowSize();
   listenToWindowResize();
+  listenToSignOutBtn();
   checkExistingDog();
   fetchPosts();
   createDog();
@@ -278,17 +279,21 @@ function checkExistingDog() {
   const dogFormContainer = document.querySelector(".dog-creation-form");
   const postForm = document.querySelector(".post-creation-form");
   const profileBtn = document.getElementById("my-profile");
+  const signOutBtn = document.getElementById("sign-out-button");
+
   let dogId = localStorage.getItem("dog_id");
 
   if (dogId) {
     togglePostForm();
     dogFormContainer.style.display = "none";
     profileBtn.style.display = "block";
+    signOutBtn.style.display = "flex";
   } else {
     toggleDogForm();
     postForm.style.display = "none";
     dogFormContainer.style.display = "none";
     profileBtn.style.display = "none";
+    signOutBtn.style.display = "none";
   }
 }
 
@@ -309,7 +314,6 @@ function filterDogs() {
 }
 
 function listenToEditBtn(postData) {
-  // const card = document.getElementsByTagName("main")[0];
   const modalBody = document.querySelector(".modal-body");
   modalBody.addEventListener("click", (event) => {
     if (event.target.className === "edit-button") {
@@ -387,5 +391,13 @@ function listenToWindowResize() {
       h1.style.display = "block";
       headerTag.style.justifyContent = "flex-end";
     }
+  });
+}
+
+function listenToSignOutBtn() {
+  const signOutBtn = document.getElementById("sign-out-button");
+  signOutBtn.addEventListener("click", () => {
+    localStorage.clear();
+    location.href = "index.html";
   });
 }
