@@ -56,9 +56,11 @@ function callDogPosts() {
 function renderPostsModal(posts) {
   let modalBody = document.querySelector(".modal-body");
   posts.reverse().forEach((post) => {
+    modalBody.innerHTML = "";
     modalBody.innerHTML += renderPost(post);
   });
 }
+
 function renderPostOnModal() {
   const modalTitle = document.querySelector(".modal-title");
   const dogId = localStorage.getItem("dog_id");
@@ -289,6 +291,14 @@ function filterDogs() {
           return regex.test($(this).data("breed"));
         })
         .show();
+    }
+  });
+}
+
+function listenToEditBtn() {
+  const card = document.getElementsByTagName("main")[0];
+  card.addEventListener("click", (event) => {
+    if (event.target.className === "edit-button") {
     }
   });
 }
