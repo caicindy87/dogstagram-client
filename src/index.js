@@ -1,15 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
+  checkWindowSize();
+  listenToWindowResize();
+  listenToSignOutBtn();
   checkExistingDog();
   fetchPosts();
   createDog();
   createPost();
   listenToLikeBtn();
   listenToCommentSubmit();
+  listenToEditBtn();
   callDogPosts();
   filterDogs();
 });
 
 let addDog = false;
+
+function checkWindowSize() {
+  const h1 = document.querySelector("h1");
+  const headerTag = document.querySelector("header");
+  if (document.documentElement.clientWidth < 1090) {
+    h1.style.display = "none";
+    headerTag.style.justifyContent = "center";
+  }
+}
 
 function fetchPosts() {
   fetch("http://localhost:3000/api/v1/posts")
@@ -48,7 +61,10 @@ function renderPost(postInfo) {
 
 function callDogPosts() {
   const profileBtn = document.getElementById("my-profile");
+  let modalBody = document.querySelector(".modal-body");
+
   profileBtn.addEventListener("click", (e) => {
+    modalBody.innerHTML = "These are your posts!";
     renderPostOnModal();
   });
 }
@@ -59,6 +75,7 @@ function renderPostsModal(posts) {
     modalBody.innerHTML += renderPost(post);
   });
 }
+
 function renderPostOnModal() {
   const modalTitle = document.querySelector(".modal-title");
   const dogId = localStorage.getItem("dog_id");
@@ -77,7 +94,6 @@ function renderSinglePost(postInfo) {
   <div class="post-card">
     <div class="title-section">
       <span class="title">${postInfo.dog.name} - ${postInfo.dog.breed}</span>
-      <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
     <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
@@ -263,17 +279,21 @@ function checkExistingDog() {
   const dogFormContainer = document.querySelector(".dog-creation-form");
   const postForm = document.querySelector(".post-creation-form");
   const profileBtn = document.getElementById("my-profile");
+  const signOutBtn = document.getElementById("sign-out-button");
+
   let dogId = localStorage.getItem("dog_id");
 
   if (dogId) {
     togglePostForm();
     dogFormContainer.style.display = "none";
     profileBtn.style.display = "block";
+    signOutBtn.style.display = "flex";
   } else {
     toggleDogForm();
     postForm.style.display = "none";
     dogFormContainer.style.display = "none";
     profileBtn.style.display = "none";
+    signOutBtn.style.display = "none";
   }
 }
 
@@ -290,5 +310,94 @@ function filterDogs() {
         })
         .show();
     }
+  });
+}
+
+function listenToEditBtn(postData) {
+  const modalBody = document.querySelector(".modal-body");
+  modalBody.addEventListener("click", (event) => {
+    if (event.target.className === "edit-button") {
+      const parentElement = event.target.parentElement.parentElement;
+
+      const caption = event.target.parentElement.parentElement.getElementsByClassName(
+        "caption"
+      )[0];
+      const captionInnerText = caption.innerText;
+      const postId = parseInt(
+        event.target.parentElement.parentElement.getElementsByClassName(
+          "like-button"
+        )[0].dataset.postId
+      );
+      const dogId = parseInt(
+        event.target.parentElement.parentElement.getElementsByClassName(
+          "like-button"
+        )[0].dataset.dogId
+      );
+      const editForm = document.createElement("form");
+      const editCaptionInputField = document.createElement("input");
+      const editSubmitBtn = document.createElement("button");
+
+      editForm.id = "edit-caption-form";
+      editSubmitBtn.type = "submit";
+      editSubmitBtn.innerText = "Update";
+      editSubmitBtn.id = "edit-caption-submit-button";
+      editCaptionInputField.id = "edit-caption-field";
+      editCaptionInputField.type = "text";
+      editCaptionInputField.value = captionInnerText;
+
+      editForm.append(editCaptionInputField, editSubmitBtn);
+
+      parentElement.replaceChild(editForm, caption);
+
+      listenToEditSubmit(dogId, postId, parentElement, caption);
+    }
+  });
+}
+
+function listenToEditSubmit(dogId, postId, parentElement, caption) {
+  const editForm = document.getElementById("edit-caption-form");
+  editForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const editCaptionField = document.getElementById("edit-caption-field");
+
+    fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts/${postId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        caption: editCaptionField.value,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((post) => {
+        console.log(post);
+        caption.innerText = post.caption;
+        parentElement.replaceChild(caption, editForm);
+      });
+  });
+}
+
+function listenToWindowResize() {
+  const h1 = document.querySelector("h1");
+  const headerTag = document.querySelector("header");
+
+  window.addEventListener("resize", () => {
+    if (document.documentElement.clientWidth < 1090) {
+      h1.style.display = "none";
+      headerTag.style.justifyContent = "center";
+    } else {
+      h1.style.display = "block";
+      headerTag.style.justifyContent = "flex-end";
+    }
+  });
+}
+
+function listenToSignOutBtn() {
+  const signOutBtn = document.getElementById("sign-out-button");
+  signOutBtn.addEventListener("click", () => {
+    localStorage.clear();
+    location.href = "index.html";
   });
 }
