@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  listenToWindowResize();
   checkExistingDog();
   fetchPosts();
   createDog();
   createPost();
   listenToLikeBtn();
   listenToCommentSubmit();
+  // listenToEditBtn();
   callDogPosts();
   filterDogs();
 });
@@ -25,6 +27,7 @@ function renderPosts(posts) {
 }
 
 function renderPost(postInfo) {
+  listenToEditBtn(postInfo);
   const firstSection = `<div class="container-fluid">
   <div class="post-card">
     <div class="title-section">
@@ -51,7 +54,7 @@ function callDogPosts() {
   let modalBody = document.querySelector(".modal-body");
 
   profileBtn.addEventListener("click", (e) => {
-    modalBody.innerHTML = "";
+    modalBody.innerHTML = "These are your posts!";
     renderPostOnModal();
   });
 }
@@ -297,10 +300,75 @@ function filterDogs() {
   });
 }
 
-function listenToEditBtn() {
+function listenToEditBtn(postData) {
   const card = document.getElementsByTagName("main")[0];
-  card.addEventListener("click", (event) => {
+  let modalBody = document.querySelector(".modal-body");
+  modalBody.addEventListener("click", (event) => {
     if (event.target.className === "edit-button") {
+      const captionInnerText = event.target.parentElement.parentElement.getElementsByClassName(
+        "caption"
+      )[0].innerText;
+      const likesSection = event.target.parentElement.parentElement.getElementsByClassName(
+        "likes"
+      )[0];
+      debugger;
+      const postId = parseInt(
+        event.target.parentElement.parentElement.getElementsByClassName(
+          "like-button"
+        )[0].dataset.postId
+      );
+      const dogId = parseInt(
+        event.target.parentElement.parentElement.getElementsByClassName(
+          "like-button"
+        )[0].dataset.dogId
+      );
+
+      modalBody.innerHTML = "";
+      modalBody.innerHTML += renderEdit(captionInnerText, postData);
+    }
+  });
+}
+
+function renderEdit(captionInnerText, postInfo) {
+  // debugger;
+  const partOne = `<div class="container-fluid">
+  <div class="post-card">
+    <div class="title-section">
+      <span class="title">${postInfo.dog.name} - ${postInfo.dog.breed}</span>
+    </div>
+    <img src="${postInfo.image_url}" alt="" class="image" />
+    <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
+    <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
+    <p class="caption">${postInfo.caption}</p>`;
+
+  const editCaptionForm = `<form class="edit-caption-form" data-form-id="${postInfo.id}">
+      <input
+        class="edit-caption-input"
+        type="text"
+        name="caption"
+        value="${captionInnerText}"
+        data-input-id="${postInfo.id}"
+      />
+      <button class="edit-button" type="submit">
+        Post
+      </button>
+    </form>
+  </div>
+  </div>`;
+  return partOne + editCaptionForm;
+}
+
+function listenToWindowResize() {
+  const windowSize = document.documentElement.clientWidth;
+  const h1 = document.querySelector("h1");
+  const headerTag = document.querySelector("header");
+  window.addEventListener("resize", () => {
+    if (document.documentElement.clientWidth < 1090) {
+      h1.style.display = "none";
+      headerTag.style.justifyContent = "center";
+    } else {
+      h1.style.display = "block";
+      headerTag.style.justifyContent = "flex-end";
     }
   });
 }

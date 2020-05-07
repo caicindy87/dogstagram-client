@@ -4,15 +4,25 @@ header {
   background-color: #151e3f;
   color: #f2f3d9;
   font-family: "Raleway", sans-serif;
+  position: relative;
+  height: 90px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 header div {
   display: flex;
-  align-items: center;
 }
 
 h1 {
-  flex-grow: 1;
+  height: 100px;
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  margin-left: -112px;
+  top: 50%;
+  margin-top: -30px;
 }
 
 #filter {
