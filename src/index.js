@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createPost();
   listenToLikeBtn();
   listenToCommentSubmit();
-  // listenToEditBtn();
+  listenToEditBtn();
   callDogPosts();
   filterDogs();
 });
@@ -37,7 +37,6 @@ function renderPosts(posts) {
 }
 
 function renderPost(postInfo) {
-  listenToEditBtn(postInfo);
   const firstSection = `<div class="container-fluid">
   <div class="post-card">
     <div class="title-section">
@@ -94,7 +93,6 @@ function renderSinglePost(postInfo) {
   <div class="post-card">
     <div class="title-section">
       <span class="title">${postInfo.dog.name} - ${postInfo.dog.breed}</span>
-      <button class="edit-button">Edit</button>
     </div>
     <img src="${postInfo.image_url}" alt="" class="image" />
     <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
@@ -311,17 +309,16 @@ function filterDogs() {
 }
 
 function listenToEditBtn(postData) {
-  const card = document.getElementsByTagName("main")[0];
-  let modalBody = document.querySelector(".modal-body");
+  // const card = document.getElementsByTagName("main")[0];
+  const modalBody = document.querySelector(".modal-body");
   modalBody.addEventListener("click", (event) => {
     if (event.target.className === "edit-button") {
-      const captionInnerText = event.target.parentElement.parentElement.getElementsByClassName(
+      const parentElement = event.target.parentElement.parentElement;
+
+      const caption = event.target.parentElement.parentElement.getElementsByClassName(
         "caption"
-      )[0].innerText;
-      const likesSection = event.target.parentElement.parentElement.getElementsByClassName(
-        "likes"
       )[0];
-      debugger;
+      const captionInnerText = caption.innerText;
       const postId = parseInt(
         event.target.parentElement.parentElement.getElementsByClassName(
           "like-button"
@@ -332,40 +329,50 @@ function listenToEditBtn(postData) {
           "like-button"
         )[0].dataset.dogId
       );
+      const editForm = document.createElement("form");
+      const editCaptionInputField = document.createElement("input");
+      const editSubmitBtn = document.createElement("button");
 
-      modalBody.innerHTML = "";
-      modalBody.innerHTML += renderEdit(captionInnerText, postData);
+      editForm.id = "edit-caption-form";
+      editSubmitBtn.type = "submit";
+      editSubmitBtn.innerText = "Update";
+      editSubmitBtn.id = "edit-caption-submit-button";
+      editCaptionInputField.id = "edit-caption-field";
+      editCaptionInputField.type = "text";
+      editCaptionInputField.value = captionInnerText;
+
+      editForm.append(editCaptionInputField, editSubmitBtn);
+
+      parentElement.replaceChild(editForm, caption);
+
+      listenToEditSubmit(dogId, postId, parentElement, caption);
     }
   });
 }
 
-function renderEdit(captionInnerText, postInfo) {
-  // debugger;
-  const partOne = `<div class="container-fluid">
-  <div class="post-card">
-    <div class="title-section">
-      <span class="title">${postInfo.dog.name} - ${postInfo.dog.breed}</span>
-    </div>
-    <img src="${postInfo.image_url}" alt="" class="image" />
-    <button class="like-button" data-post-id="${postInfo.id}" data-dog-id="${postInfo.dog.id}">♥</button>
-    <p class="likes" id="${postInfo.id}">${postInfo.likes} Likes</p>
-    <p class="caption">${postInfo.caption}</p>`;
+function listenToEditSubmit(dogId, postId, parentElement, caption) {
+  const editForm = document.getElementById("edit-caption-form");
+  editForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const editCaptionForm = `<form class="edit-caption-form" data-form-id="${postInfo.id}">
-      <input
-        class="edit-caption-input"
-        type="text"
-        name="caption"
-        value="${captionInnerText}"
-        data-input-id="${postInfo.id}"
-      />
-      <button class="edit-button" type="submit">
-        Post
-      </button>
-    </form>
-  </div>
-  </div>`;
-  return partOne + editCaptionForm;
+    const editCaptionField = document.getElementById("edit-caption-field");
+
+    fetch(`http://localhost:3000/api/v1/dogs/${dogId}/posts/${postId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        caption: editCaptionField.value,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((post) => {
+        console.log(post);
+        caption.innerText = post.caption;
+        parentElement.replaceChild(caption, editForm);
+      });
+  });
 }
 
 function listenToWindowResize() {

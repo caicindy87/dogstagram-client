@@ -160,3 +160,28 @@ body {
 .comment-button:focus {
   outline: none;
 }
+
+#edit-caption-form {
+  width: 95%;
+  padding: 8px;
+  margin: 5px auto;
+  border: 2px solid #00000020;
+  border-radius: 2px;
+}
+
+#edit-caption-field {
+  width: 80%;
+  outline: none;
+  border: none;
+}
+
+#edit-caption-submit-button {
+  border: none;
+  color: rgb(92, 114, 238);
+  font-weight: 600;
+  outline: none;
+}
+
+#edit-caption-submit-button:focus {
+  outline: none;
+}
