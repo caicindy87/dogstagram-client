@@ -48,7 +48,10 @@ function renderPost(postInfo) {
 
 function callDogPosts() {
   const profileBtn = document.getElementById("my-profile");
+  let modalBody = document.querySelector(".modal-body");
+
   profileBtn.addEventListener("click", (e) => {
+    modalBody.innerHTML = "";
     renderPostOnModal();
   });
 }
@@ -56,7 +59,6 @@ function callDogPosts() {
 function renderPostsModal(posts) {
   let modalBody = document.querySelector(".modal-body");
   posts.reverse().forEach((post) => {
-    modalBody.innerHTML = "";
     modalBody.innerHTML += renderPost(post);
   });
 }
